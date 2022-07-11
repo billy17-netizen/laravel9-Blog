@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
 
+    use hasFactory;
+
    protected $fillable = [
       'title',
       'slug',
@@ -31,7 +33,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     public function comments()

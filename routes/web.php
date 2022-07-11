@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/create-user-image', function () {
+   $image = \App\Models\Image::find(1);
+   return $image->imageable;
+
+//   $user->image()->create(['name' => 'random file for user', 'extension' => 'jpg', 'path' => 'image/random_file.jpg']);
+});
+
+
 Route::get('/', function () {
     return view('home');
 })->name('home');

@@ -32,43 +32,76 @@
                 <div class="col-md-12">
                     <h2>Message Us</h2>
                 </div>
+
                 <div class="col-md-6">
-                    <form action="#">
+                    <form autocomplete="off" method="post" action="{{route('contact.store')}}">
+                        @csrf
                         <div class="row form-group">
                             <div class="col-md-6">
                                 <!-- <label for="fname">First Name</label> -->
-                                <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                <input type="text" id="fname" name="first_name" value="{{old('first_name')}}" class="form-control" placeholder="Your firstname" required>
+                                @error('first_name')
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <!-- <label for="lname">Last Name</label> -->
-                                <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                <input type="text" id="lname" name="last_name" value="{{old('last_name')}}" class="form-control" placeholder="Your lastname" required>
+                                @error('last_name')
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="email">Email</label> -->
-                                <input type="text" id="email" class="form-control" placeholder="Your email address">
+                                <input type="text" id="email" name="email" value="{{old('email')}}" class="form-control" placeholder="Your email address" required>
+                                @error('email')
+                                    <span class="invalid-feedback  text-danger" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="subject">Subject</label> -->
-                                <input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
+                                <input type="text" id="subject" name="subject" value="{{old('subject')}}" class="form-control" placeholder="Your subject of this message">
+                                @error('subject')
+                                    <span class="invalid-feedback text-danger" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="message">Message</label> -->
-                                <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Say something about us"></textarea>
+                                <textarea name="message" id="message" value="{{old('message')}}" cols="30" rows="10" class="form-control" placeholder="Say something about us" required></textarea>
+                                @error('message')
+                                    <span class="invalid-feedback  text-danger" role="alert">
+                                        <small>{{ $message }}</small>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Send Message" class="btn btn-primary">
                         </div>
                     </form>
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="col-md-6">
                     <div id="map" class="colorlib-map"></div>

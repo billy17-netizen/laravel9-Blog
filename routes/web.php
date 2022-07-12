@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,22 +14,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+//Route::get('/create-user-image', function () {
+//   $image = \App\Models\Image::find(1);
+//   return $image->imageable;
+//
+//});
 
-Route::get('/create-user-image', function () {
-   $image = \App\Models\Image::find(1);
-   return $image->imageable;
 
-//   $user->image()->create(['name' => 'random file for user', 'extension' => 'jpg', 'path' => 'image/random_file.jpg']);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/post', function () {
-    return view('post');
-})->name('post');
+Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
+Route::post('/posts/{post:slug}', [PostsController::class, 'addComment'])->name('posts.add-comment');
 
 Route::get('/about', function () {
     return view('about');

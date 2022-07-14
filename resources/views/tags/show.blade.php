@@ -1,6 +1,6 @@
 @extends('main_layout.master')
 
-@section('title','MyBlog | Home')
+@section('title', $tag->name . ' Tag| Home')
 
 @section('content')
 
@@ -11,21 +11,21 @@
                 <div class="col-md-8 posts-col">
 
 
-                    @forelse($posts as $post)
-                    <div class="block-21 d-flex animate-box post">
-                        <a href="{{route('posts.show', $post)}}" class="blog-img" style="background-image: url({{asset('storage/'.$post->image->path)}});"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></h3>
-                            <p class="excerpt">{{$post->excerpt}}</p>
-                            <div class="meta">
-                                <div><a class="date" href="#"><span class="icon-calendar"></span> {{$post->created_at->diffForHumans()}}</a></div>
-                                <div><a class="author" href="#"><span class="icon-user2"></span> {{$post->author->name}}</a></div>
-                                <div><a class="comments-count" href="{{route('posts.show', $post)}}"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
+                    @forelse($posts as  $post)
+                        <div class="block-21 d-flex animate-box post">
+                            <a href="{{route('posts.show', $post)}}" class="blog-img" style="background-image: url({{asset('storage/'.$post->image->path)}});"></a>
+                            <div class="text">
+                                <h3 class="heading"><a href="{{route('posts.show', $post)}}">{{$post->title}}</a></h3>
+                                <p class="excerpt">{{$post->excerpt}}</p>
+                                <div class="meta">
+                                    <div><a class="date" href="#"><span class="icon-calendar"></span> {{$post->created_at->diffForHumans()}}</a></div>
+                                    <div><a class="author" href="#"><span class="icon-user2"></span> {{$post->author->name}}</a></div>
+                                    <div><a class="comments-count" href="{{route('posts.show', $post)}}"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @empty
-                        <p class="lead">There are no post to show.</p>
+                        <p class="lead">There are no post related to this tag.</p>
                     @endforelse
 
                     {{$posts->links()}}
@@ -63,7 +63,7 @@
                             <div class="block-26">
                                 <ul>
                                     @foreach($tags as $tag)
-                                    <li><a href="{{route('tag.show', $tag)}}">{{$tag->name}}</a></li>
+                                        <li><a href="{{route('tag.show', $tag)}}">{{$tag->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

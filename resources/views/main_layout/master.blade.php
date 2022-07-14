@@ -75,11 +75,11 @@
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
                             <li class="has-dropdown">
-                                <a href="#">Categories</a>
+                                <a href="{{route('categories.index')}}">Categories</a>
                                 <ul class="dropdown">
-                                    <li><a href="#">Programming</a></li>
-                                    <li><a href="#">Games</a></li>
-                                    <li><a href="#">Soft Skills</a></li>
+                                    @foreach($navbar_categories as $category)
+                                        <li><a href="{{route('categories.show',$category)}}">{{$category->name}}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li><a href="{{route('about')}}">About</a></li>
@@ -117,7 +117,7 @@
 
     @yield('content')
 
-    <div id="colorlib-subscribe" class="subs-img" style="background-image: url(blog_template/images/img_bg_2.jpg);" data-stellar-background-ratio="0.5">
+    <div id="colorlib-subscribe" class="subs-img" style="background-image: url({{asset('blog_template/images/img_bg_2.jpg')}});" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -204,7 +204,7 @@
                 <div class="col-md-3 colorlib-widget">
                     <h4>Recent Post</h4>
                     <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(blog_template/images/blog-1.jpg);">
+                        <a href="blog.html" class="blog-img" style="background-image: url({{asset('blog_template/images/blog-1.jpg')}});">
                         </a>
                         <div class="desc">
                             <h2><a href="blog.html">Creating Mobile Apps</a></h2>
@@ -212,7 +212,7 @@
                         </div>
                     </div>
                     <div class="f-blog">
-                        <a href="blog.html" class="blog-img" style="background-image: url(blog_template/images/blog-2.jpg);">
+                        <a href="blog.html" class="blog-img" style="background-image:  url({{asset('blog_template/images/blog-2.jpg')}});">
                         </a>
                         <div class="desc">
                             <h2><a href="blog.html">Creating Mobile Apps</a></h2>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -18,26 +19,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//
-//Route::get('/create-user-image', function () {
-//   $image = \App\Models\Image::find(1);
-//   return $image->imageable;
-//
-//});
 
 
+//Route Frontend
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/posts/{post:slug}', [PostsController::class, 'show'])->name('posts.show');
 Route::post('/posts/{post:slug}', [PostsController::class, 'addComment'])->name('posts.add-comment');
 
-Route::get('/about',AboutController::class)->name('about');
+Route::get('/about', AboutController::class)->name('about');
 
-Route::get('/contact',[ContactController::class , 'create'])->name('contact.create');
-Route::post('/contact',[ContactController::class , 'store'])->name('contact.store');
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
+
 Route::get('/tags/{tag:name}', [TagController::class, 'show'])->name('tag.show');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+//Route Admin
+Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+});

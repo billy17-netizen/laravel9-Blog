@@ -45,12 +45,17 @@
     <!-- Theme style  -->
     <link rel="stylesheet" href="{{asset('blog_template/css/style.css')}}">
 
+    <!-- My Style -->
+    <link rel="stylesheet" href="{{asset('css/my_style.css')}}">
+
     <!-- Modernizr JS -->
     <script src="{{asset('blog_template/js/modernizr-2.6.2.min.js')}}"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="{{asset('blog_template/js/respond.min.js')}}"></script>
     <![endif]-->
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     @yield('custom__css')
 </head>

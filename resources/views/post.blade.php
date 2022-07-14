@@ -124,3 +124,11 @@
         </div>
     </div>
 @endsection
+
+@section('custom_js')
+    <script>
+        setTimeout(function(){
+            $('.global-message').fadeOut('slow');
+        }, 3000);
+    </script>
+@endsection

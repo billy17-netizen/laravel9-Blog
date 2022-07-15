@@ -14,11 +14,8 @@ return new class extends Migration {
             $table->string('excerpt');
             $table->text('body');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
 
             $table->integer('views')->default(0);
             $table->string('status')->default('published');

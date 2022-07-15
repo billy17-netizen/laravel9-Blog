@@ -36,12 +36,14 @@ class DatabaseSeeder extends Seeder
          \App\Models\Role::factory(1)->create((['name' => 'admin']));
 
          $users = \App\Models\User::factory(10)->create();
+         \App\Models\User::factory()->create(['role_id' => 2,'name' => 'Billy Lelatobur','email' => 'billlelatobur@gmail.com']);
 
          foreach ($users as $user) {
              $user->image()->save(\App\Models\Image::factory()->make());
          }
 
          \App\Models\Category::factory(10)->create();
+         \App\Models\Category::factory()->create(['name' => 'Uncategorized']);
 
         $posts =  \App\Models\Post::factory(50)->create();
 

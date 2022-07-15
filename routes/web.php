@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\DashboardController;
+use App\Http\Controllers\AdminControllers\TinyMCEController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -42,4 +44,7 @@ require __DIR__ . '/auth.php';
 //Route Admin
 Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::resource('posts', AdminPostsController::class);
+    Route::post('upload_tinymce_image', [TinyMCEController::class, 'uploadTinymceImage'])->name('upload_tinymce_image');
 });

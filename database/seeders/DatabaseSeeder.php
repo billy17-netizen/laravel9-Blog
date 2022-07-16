@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Permission;
 use App\Models\Post;
 use App\Models\Role;
 use App\Models\Tag;
@@ -34,6 +35,16 @@ class DatabaseSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
          \App\Models\Role::factory(1)->create();
          \App\Models\Role::factory(1)->create((['name' => 'admin']));
+
+         $allRoute = \Route::getRoutes();
+         $permission_id = [];
+         foreach ($allRoute as $route) {
+            if(strpos($route->getName(),'admin') !== false) {
+               $permission =  Permission::create(['name' => $route->getName()]);
+               $permission_id[] = $permission->id;
+            }
+         }
+        \App\Models\Role::where('name','admin')->first()->permissions()->sync($permission_id);
 
          $users = \App\Models\User::factory(10)->create();
          \App\Models\User::factory()->create(['role_id' => 2,'name' => 'Billy Lelatobur','email' => 'billlelatobur@gmail.com']);

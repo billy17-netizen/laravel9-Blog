@@ -31,7 +31,7 @@
                                             <label for="inputProductTitle" class="form-label">Category Name</label>
                                             <input type="text" value="{{old('name')}}" name="name" required class="form-control" id="inputProductTitle"
                                                    placeholder="Enter Category title">
-                                            @error('title')
+                                            @error('name')
                                             <span class="text-danger">{{$message}}</span>
                                             @enderror
 

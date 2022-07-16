@@ -104,13 +104,24 @@
 
                     </ul>
                     <hr>
-
-
                 </li>
                 <li>
                     <a href="{{ route('admin.contacts') }}">
                         <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
                         <div class="menu-title">Contacts</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.settings.edit') }}">
+                        <div class="parent-icon"><i class='bx bx-info-square'></i></div>
+                        <div class="menu-title">Settings</div>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a href="{{ route('home') }}" target="_blank">
+                        <div class="parent-icon"><i class='bx bx-send'></i></div>
+                        <div class="menu-title">Visit Site</div>
                     </a>
                 </li>
             </ul>

@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
              $post->image()->save(\App\Models\Image::factory()->make());
 
          }
-
+        \App\Models\Setting::factory(1)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

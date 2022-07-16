@@ -35,6 +35,11 @@
         {{session('success')}}
     </div>
 @endif
+@if(session('error'))
+    <div class="general-message alert alert-danger">
+        {{session('error')}}
+    </div>
+@endif
 
 	<!--wrapper-->
 	<div class="wrapper">

@@ -9,6 +9,10 @@ class CheckPermissionsMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
+        //Admin has all permissions
+        if (auth()->user()->role->name === 'admin') {
+            return $next($request);
+        }
         // get the route name
         $route_name = $request->route()->getName();
         // get permissions for this authenticated person

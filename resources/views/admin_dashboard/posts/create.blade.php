@@ -3,6 +3,7 @@
 @section("style")
     <link href="{{asset('admin_dashboard_assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
 
     <script src="https://cdn.tiny.cloud/1/aupasg6zdvahhi9lmu92jxp6s8memctg1cwq6ok71og3qrlt/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
@@ -79,12 +80,20 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="mb-4">
+                                                    <label class="form-label">Post Tags</label>
+                                                    <input type="text" class="form-control" name="tags" data-role="tagsinput">
+                                                </div>
                                                 <div class="mb-3">
-                                                    <label for="inputProductDescription"   class="form-label">Post Thumbnail</label>
-                                                    <input id="thumbnail" required name="thumbnail"  type="file">
-                                                    @error('thumbnail')
-                                                    <span class="text-danger">{{$message}}</span>
-                                                    @enderror
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <label for="inputProductDescription"   class="form-label">Post Thumbnail</label>
+                                                            <input id="thumbnail" required name="thumbnail"  type="file">
+                                                            @error('thumbnail')
+                                                            <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="inputProductDescription" class="form-label">Post
@@ -114,7 +123,7 @@
 
         @section("script")
             <script src="{{asset('admin_dashboard_assets/plugins/select2/js/select2.min.js')}}"></script>
-
+            <script src="{{asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js')}}"></script>
 
             <script>
                 $('.single-select').select2({

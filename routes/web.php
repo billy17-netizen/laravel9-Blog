@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
+use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
+
+
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -49,4 +52,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(fu
 
     Route::resource('posts', AdminPostsController::class);
     Route::resource('categories', AdminCategoriesController::class);
+
+    Route::resource('tags', AdminTagsController::class)->only(['index', 'show','destroy']);
 });

@@ -3,6 +3,7 @@
 @section("style")
     <link href="{{asset('admin_dashboard_assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('admin_dashboard_assets/plugins/select2/css/select2-bootstrap4.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin_dashboard_assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
 
     <script src="https://cdn.tiny.cloud/1/aupasg6zdvahhi9lmu92jxp6s8memctg1cwq6ok71og3qrlt/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
@@ -80,6 +81,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="mb-4">
+                                                <label class="form-label">Post Tags</label>
+                                                <input type="text" value="{{$tags}}" class="form-control" name="tags" data-role="tagsinput">
+                                            </div>
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col-md-8">
@@ -102,25 +107,23 @@
                                                 <label for="inputProductDescription" class="form-label">Post
                                                     Content</label>
                                                 <textarea class="form-control" id="posts_content"
-                                                          rows="3" name="body">{{old('body', str_replace('../../../','/',$post->body))}}"</textarea>
+                                                          rows="3" name="body">{{old('body', str_replace('../../','../../../',$post->body))}}"</textarea>
                                                 @error('body')
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
-
                                             <button type="submit" class="btn btn-primary">Update Post</button>
-
-                                            <form action="{{route('admin.posts.destroy',$post)}}">
-                                                @csrf
-                                                @method("DELETE")
-                                                <button type="submit" class="btn btn-danger">Delete Post</button>
-                                            </form>
+                                            <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_post_{{$post->id}}').submit()">Delete Post</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!--end row-->
                             </div>
                         </div>
+                    </form>
+                    <form method="post" id="delete_post_{{$post->id}}" action="{{route('admin.posts.destroy',$post)}}">
+                        @csrf
+                        @method("DELETE")
                     </form>
                 </div>
             </div>
@@ -131,7 +134,7 @@
 
 @section("script")
     <script src="{{asset('admin_dashboard_assets/plugins/select2/js/select2.min.js')}}"></script>
-
+    <script src="{{asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js')}}"></script>
 
     <script>
         $('.single-select').select2({

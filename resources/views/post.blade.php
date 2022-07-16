@@ -28,7 +28,7 @@
                     </div>
                     <div class="row row-pb-lg animate-box">
                         <div class="col-md-12">
-                            <h2 class="colorlib-heading-2">{{count($post->comments)}}Comment</h2>
+                            <h2 class="colorlib-heading-2">{{count($post->comments)}} Comment</h2>
                             @foreach($post->comments as $comment)
                             <div id="comment_{{$comment->id}}" class="review">
                                 <div class="user-img" style="background-image: url({{$comment->user->image ? asset('storage/'.$comment->user->image->path. ''): asset('storage/usernotImage/placeholder_user.png')}});"></div>
@@ -96,11 +96,11 @@
                             <h3 class="sidebar-heading">Recent Blog</h3>
                             @foreach($recent_posts as $recent_post)
                                 <div class="f-blog">
-                                    <a href="{{route('posts.show',$recent_post)}}" class="blog-img"style="background-image: url({{asset('storage/'.$recent_post->image->path)}});">
+                                    <a href="{{route('posts.show',$recent_post)}}" class="blog-img"style="background-image: url({{asset('storage/'.$recent_post->image->path)}})">
                                     </a>
                                     <div class="desc">
                                         <p class="admin"><span{{$recent_post->created_at->diffForHumans()}}</span></p>
-                                        <h2><a href="blog.html">{{Str::limit($recent_post->title,20)}}</a></h2>
+                                        <h2><a href="{{route('posts.show',$recent_post)}}">{{Str::limit($recent_post->title,20)}}</a></h2>
                                         <p>{{$recent_post->excerpt}}</p>
                                     </div>
                                 </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminControllers\AdminCategoriesController;
+use App\Http\Controllers\AdminControllers\AdminContactsController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRolesController;
 use App\Http\Controllers\AdminControllers\AdminUsersController;
@@ -62,5 +63,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','CheckPermissions'])-
     Route::resource('roles', AdminRolesController::class)->except('show');
 
     Route::resource('users', AdminUsersController::class);
+
+    Route::get('contacts', [AdminContactsController::class, 'index'])->name('contacts');
+    Route::delete('contacts/{contact}', [AdminContactsController::class, 'destroy'])->name('contacts.destroy');
 
 });

@@ -19,6 +19,7 @@ class Post extends Model
       'body',
       'user_id',
        'category_id',
+       'approved'
     ];
 
     public function author()
@@ -44,5 +45,11 @@ class Post extends Model
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    //scope function
+    public function scopeApproved($query)
+    {
+        return $query->where('approved', true);
     }
 }

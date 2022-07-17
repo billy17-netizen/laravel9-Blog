@@ -10,7 +10,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $posts = Post::latest()->withCount('comments')->paginate(10);
+        $posts = Post::latest('id')
+            ->approved()
+            ->withCount('comments')->paginate(10);
         $recent_posts = Post::latest()->take(5)->get();
         $Categories = Category::withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
 

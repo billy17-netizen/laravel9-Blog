@@ -89,6 +89,7 @@ class AdminPostsController extends Controller
     {
         $this->rules['thumbnail'] = 'nullable|file|mimes:jpeg,png,jpg,gif,svg|max:2048';
         $validated = request()->validate($this->rules);
+        $validated['approved'] = $request->input('approved') !== null;
         $post->update($validated);
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');

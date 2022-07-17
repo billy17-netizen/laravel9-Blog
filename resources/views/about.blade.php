@@ -10,7 +10,7 @@
                 <div class="col-md-7">
                     <div class="about-desc">
                         <div class="about-img-1 animate-box" style="background-image: url({{asset('storage/'.$settings->about_first_image)}})"></div>
-                        <div class="about-img-2 animate-box" style="background-image: url({{asset('storage/'.$settings->about_second_image)}})"></div>
+                        <div class="about-img-2 animate-box" style="    background-image: url({{asset('storage/'.$settings->about_second_image)}})"></div>
                     </div>
                 </div>
                 <div class="col-md-5">

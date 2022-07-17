@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
+    <meta name=_token" content="{{csrf_token()}}" />
 
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
@@ -133,12 +134,12 @@
                             <form class="form-inline qbstp-header-subscribe">
                                 <div class="col-three-forth">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="email" placeholder="Enter your email">
+                                        <input type="email" required name="subscribe_email" class="form-control" id="email" placeholder="Enter your email">
                                     </div>
                                 </div>
                                 <div class="col-one-third">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Subscribe Now</button>
+                                        <button id="subscribe-btn" type="submit" class="btn btn-primary">Subscribe Now</button>
                                     </div>
                                 </div>
                             </form>
@@ -264,6 +265,66 @@
 <script src="{{asset('blog_template/js/jquery.countTo.js')}}"></script>
 <!-- Main -->
 <script src="{{asset('blog_template/js/main.js')}}"></script>
+
+<script>
+    $(function () {
+        function isEmail(email) {
+            const regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        $(document).on('click','#subscribe-btn', (e) => {
+            e.preventDefault();
+            let i = $(e.target);
+
+            let email = i.parents("form").find("input[name='subscribe_email']").val();
+
+            if(!isEmail(email)){
+               $('body').append('<div class="global-message alert alert-danger subscribe-error ">Please enter a valid email address</div>');
+                return;
+            }else{
+
+                let formData = new FormData();
+                let token = $('meta[name="csrf-token"]').attr('content');
+                formData.append('_token', token);
+                formData.append('email', email);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{route('newsletter.store')}}',
+                    type: 'POST',
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: formData,
+                    success: function (data) {
+                            $('body').append('<div class="global-message alert alert-success subscribe-success ">' + data.message + '</div>');
+                            i.parents("form").find("input[name='subscribe_email']").val('');
+                            setTimeout(function () {
+                                $('.subscribe-success').fadeOut();
+                            }, 5000);
+                    },
+                    statusCode: {
+                        500: function (data) {
+                            $('body').append('<div class="global-message alert alert-danger subscribe-error ">Invalid Email Address</div>');
+                            setTimeout(function () {
+                                $('.subscribe-error').fadeOut();
+                            }, 5000);
+                        }
+                    }
+                });
+            }
+
+            setTimeout( () => {
+                $('.global-message.subscribe-error').fadeOut();
+            }, 5000);
+
+
+        });
+    })
+</script>
 
 @yield('custom_js')
 

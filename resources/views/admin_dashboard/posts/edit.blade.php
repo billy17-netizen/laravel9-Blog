@@ -112,6 +112,12 @@
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
+                                            <div class="mb-3">
+                                                <div class="form-check form-switch">
+                                                    <input {{$post->approved ? 'checked' : ''}} name="approved" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                                    <label class="form-check-label {{$post->approved ? 'text-success' : 'text-warning'}}" for="flexSwitchCheckChecked">{{$post->approved ? 'Approved' : 'Not Approved'}}</label>
+                                                </div>
+                                            </div>
                                             <button type="submit" class="btn btn-primary">Update Post</button>
                                             <a href="#" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_post_{{$post->id}}').submit()">Delete Post</a>
                                         </div>
